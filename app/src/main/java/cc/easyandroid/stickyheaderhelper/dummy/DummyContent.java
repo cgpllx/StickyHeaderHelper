@@ -32,13 +32,21 @@ public class DummyContent {
         }
     }
 
+    public static List<DummyItem> getItems() {
+        List<DummyItem> list = new ArrayList<>();
+        for (int position = 1; position <= COUNT; position++) {
+            list.add(new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position), false));
+        }
+        return list;
+    }
+
     private static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position), false);
     }
 
     private static String makeDetails(int position) {
@@ -57,10 +65,12 @@ public class DummyContent {
         public final String id;
         public final String content;
         public final String details;
+        public final boolean stickyheader;
 
-        public DummyItem(String id, String content, String details) {
+        public DummyItem(String id, String content, String details, boolean stickyheader) {
             this.id = id;
             this.content = content;
+            this.stickyheader = stickyheader;
             this.details = details;
         }
 
