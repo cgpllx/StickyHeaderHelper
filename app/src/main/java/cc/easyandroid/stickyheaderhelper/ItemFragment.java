@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cc.easyandroid.easyrecyclerview.EasyRecyclerAdapter;
 import cc.easyandroid.easyrecyclerview.EasyRecyclerView;
 import cc.easyandroid.easyrecyclerview.core.DefaultFooterHander;
@@ -35,7 +38,19 @@ public class ItemFragment extends Fragment {
 //        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
         recyclerView.setHeaderHander(new DefaultHeaderHander(getContext()));
         recyclerView.setFooterHander(new DefaultFooterHander(getContext()));
-        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS).setStickyHeaders(true);
+        List<DummyContent.DummyItem> items=new ArrayList<>();
+        items.addAll(DummyContent.ITEMS);
+        items.add(0,new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+        items.add(new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+        items.addAll(DummyContent.getItems());
+        items.add(new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+        items.addAll(DummyContent.getItems());
+        items.add(new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+//        items.addAll(DummyContent.ITEMS);
+        items.add(new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+        items.addAll(DummyContent.getItems());
+        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(items).setStickyHeaders(true);
+
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener<DummyContent.DummyItem>() {
             @Override

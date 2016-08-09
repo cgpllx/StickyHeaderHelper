@@ -23,15 +23,6 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
     public static final int DEFAULTTYPE = 0x10;
 
     public MyItemRecyclerViewAdapter(List<DummyItem> items) {
-        items.add(0,new DummyItem("dd", "Item ", "dddff", true));
-        items.add(new DummyItem("dd", "Item ", "dddff", true));
-        items.addAll(DummyContent.getItems());
-        items.add(new DummyItem("dd", "Item ", "dddff", true));
-        items.addAll(DummyContent.getItems());
-        items.add(new DummyItem("dd", "Item ", "dddff", true));
-//        items.addAll(DummyContent.ITEMS);
-        items.add(new DummyItem("dd", "Item ", "dddff", true));
-        items.addAll(DummyContent.getItems());
         addDatas(items);
 //        stickyHeaderHelper=new StickyHeaderHelper(this,this);
 //        stickyHeaderHelper.attachToRecyclerView(mRecyclerView);
