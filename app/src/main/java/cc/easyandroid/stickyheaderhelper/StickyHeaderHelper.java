@@ -254,7 +254,7 @@ public class StickyHeaderHelper extends OnScrollListener {
         if (dummyItem == null) {
             return RecyclerView.NO_POSITION;
         }
-//            return 10;
+//  return 10;
 //        }
         return mAdapter.getGlobalPositionOf(dummyItem);
     }

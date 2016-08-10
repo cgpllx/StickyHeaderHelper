@@ -93,11 +93,6 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
         }
     }
 
-    @Override
-    public long getHeaderId(int position) {
-
-        return 0;
-    }
 
     public ViewGroup getStickySectionHeadersHolder() {
         return (ViewGroup) ((Activity) mRecyclerView.getContext()).findViewById(R.id.sticky_header_container);
