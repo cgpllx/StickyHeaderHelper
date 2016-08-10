@@ -196,12 +196,12 @@ public class StickyHeaderHelper extends OnScrollListener {
         removeViewFromParent(view);
         mStickyHolderLayout.setClipToPadding(false);
         mStickyHolderLayout.addView(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(),"dddd",Toast.LENGTH_SHORT).show();
-            }
-        });
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(v.getContext(),"dddd",Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     public void clearHeader() {

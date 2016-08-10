@@ -84,12 +84,12 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
             }
         } else if (viewHolder instanceof StickViewHolder) {
             StickViewHolder stickViewHolder = (StickViewHolder) viewHolder;
-            stickViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "imageView id=" + position, Toast.LENGTH_SHORT).show();
-                }
-            });
+//            stickViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(v.getContext(), "imageView id=" + position, Toast.LENGTH_SHORT).show();
+//                }
+//            });
         }
     }
 
