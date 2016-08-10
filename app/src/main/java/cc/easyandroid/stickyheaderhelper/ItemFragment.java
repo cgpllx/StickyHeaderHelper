@@ -38,27 +38,30 @@ public class ItemFragment extends Fragment {
 //        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
         recyclerView.setHeaderHander(new DefaultHeaderHander(getContext()));
         recyclerView.setFooterHander(new DefaultFooterHander(getContext()));
-        List<DummyContent.DummyItem> items=new ArrayList<>();
+        List<DummyContent.DummyItem> items = new ArrayList<>();
         items.addAll(DummyContent.ITEMS);
-        items.add(0,new DummyContent.DummyItem("dd", "Item ", "dddff", true));
-        items.add(new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+        items.add(0, new DummyContent.DummyItem("dd", "content111 ", "dddff", true));
+        items.add(new DummyContent.DummyItem("dd", "content222 ", "dddff", true));
         items.addAll(DummyContent.getItems());
-        items.add(new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+        items.add(new DummyContent.DummyItem("dd", "content333 ", "dddff", true));
         items.addAll(DummyContent.getItems());
-        items.add(new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+        items.add(new DummyContent.DummyItem("dd", "content444 ", "dddff", true));
 //        items.addAll(DummyContent.ITEMS);
-        items.add(new DummyContent.DummyItem("dd", "Item ", "dddff", true));
+        items.add(new DummyContent.DummyItem("dd", "content555 ", "dddff", true));
         items.addAll(DummyContent.getItems());
-        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(items).setStickyHeaders(true);
+        final MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(items).setStickyHeaders(true);
 
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener<DummyContent.DummyItem>() {
             @Override
-            public void onItemClick(int i, DummyContent.DummyItem dummyItem) {
+            public void onItemClick(View v, int i) {
                 if (toast == null) {
                     toast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
                 }
-                toast.setText("i=" + i);
+//                EasyRecyclerAdapter adapter1=null;
+//                DummyContent.DummyItem dummyItem=  adapter1.getData(i);
+                toast.setText("i=" + i + "  ---  " + "dummyItem=" + adapter.getData(i) );
+//                toast.setText("i=" + i + "  ---  " + "dummyItem=" + adapter.getData(i).content);
                 toast.show();
             }
         });

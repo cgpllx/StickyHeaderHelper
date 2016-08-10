@@ -1,18 +1,3 @@
-/*
- * Copyright 2016 Martin Guillon & Davide Steduto (Hyper-Optimized for FlexibleAdapter project)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package cc.easyandroid.stickyheaderhelper;
 
 import android.animation.Animator;
@@ -25,12 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.Toast;
 
 import cc.easyandroid.stickyheaderhelper.dummy.DummyContent;
 
-/**
- * @since 25/03/2016 Created
- */
 public class StickyHeaderHelper extends OnScrollListener {
 
     private static final String TAG = StickyRecyclerHeadersAdapter.class.getSimpleName();
@@ -146,7 +129,7 @@ public class StickyHeaderHelper extends OnScrollListener {
             Log.v(TAG, "swapHeader newHeaderPosition=" + mHeaderPosition);
             swapHeader(holder);
         } else if (updateHeaderContent && mStickyHeaderViewHolder != null) {
-            mAdapter.onBindViewHolder(mStickyHeaderViewHolder, mHeaderPosition);
+//            mAdapter.onBindViewHolder(mStickyHeaderViewHolder, mHeaderPosition);
             ensureHeaderParent();
         }
         translateHeader();
@@ -213,6 +196,12 @@ public class StickyHeaderHelper extends OnScrollListener {
         removeViewFromParent(view);
         mStickyHolderLayout.setClipToPadding(false);
         mStickyHolderLayout.addView(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"dddd",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void clearHeader() {
