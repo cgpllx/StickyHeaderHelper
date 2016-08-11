@@ -258,12 +258,12 @@ public class StickyHeaderHelper extends OnScrollListener {
      * @return ViewHolder of type FlexibleViewHolder of the associated header position
      */
     @SuppressWarnings("unchecked")
-    private MyItemRecyclerViewAdapter.StickViewHolder getHeaderViewHolder(int position) {
+    private StickyRecyclerHeadersAdapter.StickViewHolder getHeaderViewHolder(int position) {
         //Find existing ViewHolder
-        MyItemRecyclerViewAdapter.StickViewHolder holder = (MyItemRecyclerViewAdapter.StickViewHolder) mRecyclerView.findViewHolderForAdapterPosition(position);
+        StickyRecyclerHeadersAdapter.StickViewHolder holder = (StickyRecyclerHeadersAdapter.StickViewHolder) mRecyclerView.findViewHolderForAdapterPosition(position);
         if (holder == null) {
             //Create and binds a new ViewHolder
-            holder = (MyItemRecyclerViewAdapter.StickViewHolder) mAdapter.onCreateHeaderViewHolder(mRecyclerView, mAdapter.getItemViewType(position));
+            holder = (StickyRecyclerHeadersAdapter.StickViewHolder) mAdapter.onCreateHeaderViewHolder(mRecyclerView, mAdapter.getItemViewType(position));
             mAdapter.bindViewHolder(holder, position);
 
             //Restore the Adapter position

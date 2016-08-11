@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,15 +24,11 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
 
     public MyItemRecyclerViewAdapter(List<DummyItem> items) {
         addDatas(items);
-//        stickyHeaderHelper=new StickyHeaderHelper(this,this);
-        registerAdapterDataObserver(new AdapterDataObserver());
-//        stickyHeaderHelper.attachToRecyclerView(mRecyclerView);
     }
 
 
     @Override
     public RecyclerView.ViewHolder onCreate(ViewGroup viewGroup, int viewType) {
-//        viewGroup.clic
         switch (viewType) {
             case STICKYHEADERTYPE:
                 return onCreateHeaderViewHolder(viewGroup, viewType);
@@ -44,7 +42,6 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
 
     @Override
     public int onCreatItemViewType(int position) {
-
         DummyItem dummyItem = getData(position + getHeaderCount());
         if (dummyItem != null && dummyItem.stickyheader) {
             return STICKYHEADERTYPE;
@@ -59,10 +56,6 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
      * @return the global position in the Adapter if found, -1 otherwise
      * @since 5.0.0-b1
      */
-//    public int getGlobalPositionOf(@NonNull IFlexible item) {
-//        return item != null && mItems != null && !mItems.isEmpty() ? mItems.indexOf(item) : -1;
-//    }
-//    @Override
     public void onBind(RecyclerView.ViewHolder viewHolder, final int position) {
         if (viewHolder instanceof ViewHolder) {
             ViewHolder holder = (ViewHolder) viewHolder;
@@ -71,14 +64,22 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
                 holder.mIdView.setText(holder.mItem.id);
                 holder.mContentView.setText(holder.mItem.content);
             }
-        } else if (viewHolder instanceof StickViewHolder) {
-            StickViewHolder stickViewHolder = (StickViewHolder) viewHolder;
-//            stickViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(v.getContext(), "imageView id=" + position, Toast.LENGTH_SHORT).show();
-//                }
-//            });
+        } else if (viewHolder instanceof MyStickViewHolder) {
+            MyStickViewHolder stickViewHolder = (MyStickViewHolder) viewHolder;
+            stickViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "imageView id=" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+    class MyStickViewHolder extends StickViewHolder{
+        ImageView imageView;
+
+        public MyStickViewHolder(View item, StickyRecyclerHeadersAdapter adapter) {
+            super(item, adapter);
+            imageView= (ImageView) item.findViewById(R.id.imageView);
         }
     }
 
@@ -89,16 +90,10 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
 
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_stick, viewGroup, false);
-        return new StickViewHolder(view, this);
+        return new MyStickViewHolder(view, this);
     }
 
-    /**
-     * Retrieve the global position of the Item in the Adapter list.
-     *
-     * @param item the item to find
-     * @return the global position in the Adapter if found, -1 otherwise
-     * @since 5.0.0-b1
-     */
+
     public int getGlobalPositionOf(@NonNull Object item) {
         return item != null && mDatas != null && !mDatas.isEmpty() ? mDatas.indexOf(item) + getHeaderCount() : -1;
     }
@@ -188,10 +183,10 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
                 stickyHeaderHelper = new StickyHeaderHelper(this, mStickyHeaderChangeListener);
             if (!stickyHeaderHelper.isAttachedToRecyclerView())
                 stickyHeaderHelper.attachToRecyclerView(mRecyclerView);
+            registerAdapterDataObserver(new AdapterDataObserver());
         } else if (stickyHeaderHelper != null) {
-//            this.headersSticky = false;
-//            mStickyHeaderHelper.detachFromRecyclerView(mRecyclerView);
-//            mStickyHeaderHelper = null;
+            stickyHeaderHelper.detachFromRecyclerView(mRecyclerView);
+            stickyHeaderHelper = null;
         }
         return this;
     }
