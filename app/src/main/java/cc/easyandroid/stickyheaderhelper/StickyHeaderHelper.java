@@ -10,9 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.Toast;
-
-import cc.easyandroid.stickyheaderhelper.dummy.DummyContent;
 
 public class StickyHeaderHelper extends OnScrollListener {
 
@@ -21,7 +18,7 @@ public class StickyHeaderHelper extends OnScrollListener {
     private StickyRecyclerHeadersAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private ViewGroup mStickyHolderLayout;
-    private MyItemRecyclerViewAdapter.StickViewHolder mStickyHeaderViewHolder;
+    private StickyRecyclerHeadersAdapter.StickViewHolder mStickyHeaderViewHolder;
     private StickyRecyclerHeadersAdapter.OnStickyHeaderChangeListener mStickyHeaderChangeListener;
     private int mHeaderPosition = RecyclerView.NO_POSITION;
 
@@ -125,7 +122,7 @@ public class StickyHeaderHelper extends OnScrollListener {
         // Check if there is a new header should be sticky
         if (mHeaderPosition != headerPosition) {
             mHeaderPosition = headerPosition;
-            MyItemRecyclerViewAdapter.StickViewHolder holder = getHeaderViewHolder(headerPosition);
+            StickyRecyclerHeadersAdapter.StickViewHolder holder = getHeaderViewHolder(headerPosition);
             Log.v(TAG, "swapHeader newHeaderPosition=" + mHeaderPosition);
             swapHeader(holder);
         } else if (updateHeaderContent && mStickyHeaderViewHolder != null) {
@@ -172,7 +169,7 @@ public class StickyHeaderHelper extends OnScrollListener {
         //Log.v(TAG, "TranslationX=" + headerOffsetX + " TranslationY=" + headerOffsetY);
     }
 
-    private void swapHeader(MyItemRecyclerViewAdapter.StickViewHolder newHeader) {
+    private void swapHeader(StickyRecyclerHeadersAdapter.StickViewHolder newHeader) {
         if (mStickyHeaderViewHolder != null) {
             resetHeader(mStickyHeaderViewHolder);
         }
@@ -196,12 +193,6 @@ public class StickyHeaderHelper extends OnScrollListener {
         removeViewFromParent(view);
         mStickyHolderLayout.setClipToPadding(false);
         mStickyHolderLayout.addView(view);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(v.getContext(),"dddd",Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     public void clearHeader() {
@@ -215,7 +206,7 @@ public class StickyHeaderHelper extends OnScrollListener {
         }
     }
 
-    private void resetHeader(MyItemRecyclerViewAdapter.StickViewHolder header) {
+    private void resetHeader(StickyRecyclerHeadersAdapter.StickViewHolder header) {
         final View view = header.getContentView();
         removeViewFromParent(view);
         //Reset transformation on removed header
@@ -247,7 +238,7 @@ public class StickyHeaderHelper extends OnScrollListener {
 //        if(mAdapter.getItemViewType(adapterPosHere)){
 //
 //        }
-        DummyContent.DummyItem dummyItem = mAdapter.getSectionHeader(adapterPosHere);//.stickyheader
+        Object dummyItem = mAdapter.getSectionHeader(adapterPosHere);//.stickyheader
 //        if(adapterPosHere>10){
 //            return 11;
 //        }

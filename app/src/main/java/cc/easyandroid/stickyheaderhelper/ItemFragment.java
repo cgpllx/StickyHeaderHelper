@@ -40,19 +40,19 @@ public class ItemFragment extends Fragment {
         recyclerView.setFooterHander(new DefaultFooterHander(getContext()));
         List<DummyContent.DummyItem> items = new ArrayList<>();
         items.addAll(DummyContent.ITEMS);
-        items.add(0, new DummyContent.DummyItem("dd", "content111 ", "dddff", true));
+//        items.add(0, new DummyContent.DummyItem("dd", "content111 ", "dddff", true));
         items.add(new DummyContent.DummyItem("dd", "content222 ", "dddff", true));
         items.addAll(DummyContent.getItems());
         items.add(new DummyContent.DummyItem("dd", "content333 ", "dddff", true));
         items.addAll(DummyContent.getItems());
         items.add(new DummyContent.DummyItem("dd", "content444 ", "dddff", true));
-//        items.addAll(DummyContent.ITEMS);
+        items.addAll(DummyContent.ITEMS);
         items.add(new DummyContent.DummyItem("dd", "content555 ", "dddff", true));
         items.addAll(DummyContent.getItems());
         final MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(items).setStickyHeaders(true);
 
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener<DummyContent.DummyItem>() {
+        adapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int i) {
                 if (toast == null) {

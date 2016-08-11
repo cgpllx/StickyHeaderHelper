@@ -3,41 +3,62 @@ package cc.easyandroid.stickyheaderhelper;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
-
-import cc.easyandroid.stickyheaderhelper.dummy.DummyContent;
+import android.widget.FrameLayout;
 
 /**
  * Created by cgpllx on 2016/8/8.
  */
 public interface StickyRecyclerHeadersAdapter<VH extends RecyclerView.ViewHolder> {
-
-
     VH onCreateHeaderViewHolder(ViewGroup parent, int viewType);
-
-    void onBindHeaderViewHolder(VH holder, int position);
 
     int getItemCount();
 
-    void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position);
+    int getGlobalPositionOf(@NonNull Object item);
 
-    int getGlobalPositionOf(@NonNull DummyContent.DummyItem item);
-
-    DummyContent.DummyItem getSectionHeader(@IntRange(from = 0) int position);
+    Object getSectionHeader(@IntRange(from = 0) int position);
 
     int getItemViewType(int position);
 
     void bindViewHolder(RecyclerView.ViewHolder viewHolder, int position);
 
-    public interface OnStickyHeaderChangeListener {
-        /**
-         * Called when the current sticky header changed.
-         *
-         * @param sectionIndex the position of header, -1 if no header is sticky
-         * @since 5.0.0-b1
-         */
+    RecyclerView getRecyclerView();
+
+    ViewGroup getStickySectionHeadersHolder();
+
+    interface OnStickyHeaderChangeListener {//sticky header 改变监听
+
         void onStickyHeaderChange(int sectionIndex);
     }
 
-    ViewGroup getStickySectionHeadersHolder();
+
+    class StickViewHolder extends RecyclerView.ViewHolder {
+        private View contentView;
+        private int mBackupPosition = RecyclerView.NO_POSITION;
+
+        public StickViewHolder(View item, StickyRecyclerHeadersAdapter adapter) {
+            super(new FrameLayout(item.getContext()));
+            itemView.setLayoutParams(adapter.getRecyclerView().getLayoutManager()
+                    .generateLayoutParams(item.getLayoutParams()));
+            ((FrameLayout) itemView).addView(item);//Add View after setLayoutParams
+            contentView = itemView;
+        }
+
+        public View getContentView() {
+            return contentView != null ? contentView : itemView;
+        }
+
+        public int getFlexibleAdapterPosition() {
+            int position = getAdapterPosition();
+            if (position == RecyclerView.NO_POSITION) {
+                position = mBackupPosition;
+            }
+            return position;
+        }
+
+        public void setBackupPosition(int backupPosition) {
+            mBackupPosition = backupPosition;
+        }
+    }
 }
