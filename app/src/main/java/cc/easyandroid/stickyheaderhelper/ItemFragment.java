@@ -58,7 +58,7 @@ public class ItemFragment extends Fragment {
                 if (toast == null) {
                     toast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
                 }
-//                EasyRecyclerAdapter adapter1=null;
+                EasyRecyclerAdapter adapter1=null;
 //                DummyContent.DummyItem dummyItem=  adapter1.getData(i);
                 toast.setText("i=" + i + "  ---  " + "dummyItem=" + adapter.getData(i) );
 //                toast.setText("i=" + i + "  ---  " + "dummyItem=" + adapter.getData(i).content);
