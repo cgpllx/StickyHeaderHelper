@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:context="cc.easyandroid.stickyheaderhelper.ItemFragment"
+        tools:context="cc.easyandroid.demo.ItemFragment"
         tools:listitem="@layout/fragment_item" />
     <!--android.support.v7.widget.RecyclerView-->
     <include layout="@layout/sticky_header_layout" />
