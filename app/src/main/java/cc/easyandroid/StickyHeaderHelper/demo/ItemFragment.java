@@ -1,4 +1,4 @@
-package cc.easyandroid.StickyHeaderHelper.demo;
+package cc.easyandroid.stickyheaderhelper.demo;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,11 +12,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.easyandroid.StickyHeaderHelper.demo.dummy.DummyContent;
 import cc.easyandroid.easyrecyclerview.EasyRecyclerAdapter;
 import cc.easyandroid.easyrecyclerview.EasyRecyclerView;
 import cc.easyandroid.easyrecyclerview.core.DefaultFooterHander;
 import cc.easyandroid.easyrecyclerview.core.DefaultHeaderHander;
+import cc.easyandroid.stickyheaderhelper.demo.dummy.DummyContent;
 
 public class ItemFragment extends Fragment {
 
@@ -49,7 +49,7 @@ public class ItemFragment extends Fragment {
         items.addAll(DummyContent.ITEMS);
         items.add(new DummyContent.DummyItem("dd", "content555 ", "dddff", true));
         items.addAll(DummyContent.getItems());
-        final MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(items).setStickyHeaders(true);
+        final MyItemRecyclerViewAdapter adapter = new  MyItemRecyclerViewAdapter(items).setStickyHeaders(true);
 
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener() {

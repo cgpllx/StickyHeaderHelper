@@ -1,4 +1,4 @@
-package cc.easyandroid.StickyHeaderHelper.demo.dummy;
+package cc.easyandroid.stickyheaderhelper.demo.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,8 +1,10 @@
-package cc.easyandroid.StickyHeaderHelper.demo;
+package cc.easyandroid.stickyheaderhelper.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import cc.easyandroid.stickyheaderhelper.demo.ItemFragment;
 
 public class MainActivity extends AppCompatActivity {
 

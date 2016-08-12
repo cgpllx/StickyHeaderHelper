@@ -1,4 +1,4 @@
-package cc.easyandroid.StickyHeaderHelper.demo;
+package cc.easyandroid.stickyheaderhelper.demo;
 
 import android.app.Activity;
 import android.support.annotation.IntRange;
@@ -13,18 +13,18 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import cc.easyandroid.StickyHeaderHelper.demo.dummy.DummyContent.DummyItem;
 import cc.easyandroid.easyrecyclerview.EasyRecyclerAdapter;
+import cc.easyandroid.stickyheaderhelper.demo.dummy.DummyContent;
 import cc.easyandroid.stickyrecyclerheader.StickyHeaderHelper;
 import cc.easyandroid.stickyrecyclerheader.StickyRecyclerHeadersAdapter;
 
 
-public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> implements StickyRecyclerHeadersAdapter {
+public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyContent.DummyItem> implements StickyRecyclerHeadersAdapter {
 
     public static final int STICKYHEADERTYPE = 0x11;
     public static final int DEFAULTTYPE = 0x10;
 
-    public MyItemRecyclerViewAdapter(List<DummyItem> items) {
+    public MyItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
         addDatas(items);
         registerAdapterDataObserver(new AdapterDataObserver());
     }
@@ -45,7 +45,7 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
 
     @Override
     public int onCreatItemViewType(int position) {
-        DummyItem dummyItem = getData(position + getHeaderCount());
+        DummyContent.DummyItem dummyItem = getData(position + getHeaderCount());
         if (dummyItem != null && dummyItem.stickyheader) {
             return STICKYHEADERTYPE;
         }
@@ -105,11 +105,11 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
         return item != null && mDatas != null && !mDatas.isEmpty() ? mDatas.indexOf(item) + getHeaderCount() : -1;
     }
 
-    public DummyItem getSectionHeader(@IntRange(from = 0) int position) {
+    public DummyContent.DummyItem getSectionHeader(@IntRange(from = 0) int position) {
         //Headers are not visible nor sticky
         //When headers are visible and sticky, get the previous header
         for (int i = position; i >= 0; i--) {
-            DummyItem item = getData(i);
+            DummyContent.DummyItem item = getData(i);
             if (item != null && item.stickyheader) return item;
         }
         return null;
@@ -204,7 +204,7 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyItem> im
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public DummyContent.DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);
