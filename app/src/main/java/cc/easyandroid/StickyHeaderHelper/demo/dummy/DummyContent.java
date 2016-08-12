@@ -1,4 +1,4 @@
-package cc.easyandroid.stickyheaderhelper.dummy;
+package cc.easyandroid.StickyHeaderHelper.demo.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class DummyContent {
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 35;
 
     static {
         // Add some sample items.
