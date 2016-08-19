@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import cc.easyandroid.easyrecyclerview.EasyRecyclerAdapter;
-import cc.easyandroid.stickyheaderhelper.demo1.dummy.DummyContent;
+import cc.easyandroid.stickyheaderhelper.demo.dummy.DummyContent;
 import cc.easyandroid.stickyrecyclerheader.StickyHeaderHelper;
 import cc.easyandroid.stickyrecyclerheader.StickyRecyclerHeadersAdapter;
 

@@ -16,7 +16,7 @@ import cc.easyandroid.easyrecyclerview.EasyRecyclerAdapter;
 import cc.easyandroid.easyrecyclerview.EasyRecyclerView;
 import cc.easyandroid.easyrecyclerview.core.DefaultFooterHander;
 import cc.easyandroid.easyrecyclerview.core.DefaultHeaderHander;
-import cc.easyandroid.stickyheaderhelper.demo1.dummy.DummyContent;
+import cc.easyandroid.stickyheaderhelper.demo.dummy.DummyContent;
 
 public class ItemFragment extends Fragment {
 
