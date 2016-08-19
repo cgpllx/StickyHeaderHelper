@@ -1,1 +1,2 @@
-include ':app', ':StickyRecyclerHeader'
+include ':app'
+//include ':StickyRecyclerHeader'
