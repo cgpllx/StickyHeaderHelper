@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,14 @@ import android.widget.Toast;
 import java.util.List;
 
 import cc.easyandroid.easyrecyclerview.EasyRecyclerAdapter;
+import cc.easyandroid.easyrecyclerview.EasyRecyclerView;
 import cc.easyandroid.stickyheaderhelper.demo.dummy.DummyContent;
 import cc.easyandroid.stickyrecyclerheader.StickyHeaderHelper;
 import cc.easyandroid.stickyrecyclerheader.StickyRecyclerHeadersAdapter;
 
 
-public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyContent.DummyItem> implements StickyRecyclerHeadersAdapter {
+
+public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyContent.DummyItem> implements StickyRecyclerHeadersAdapter, EasyRecyclerView.HeaderHeightChangedListener {
 
     public static final int STICKYHEADERTYPE = 0x11;
     public static final int DEFAULTTYPE = 0x10;
@@ -79,6 +82,14 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyContent.
         }
     }
 
+    @Override
+    public void onChanged(int headerHeight) {
+        if (stickyHeaderHelper != null) {
+            stickyHeaderHelper.updateOrClearHeader(false);
+            Log.v("ffonChanged", "onChanged  headerHeight =" +headerHeight);
+        }
+    }
+
     class MyStickViewHolder extends StickViewHolder {
         ImageView imageView;
         TextView content;
@@ -117,7 +128,6 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyContent.
 
     StickyHeaderHelper stickyHeaderHelper;
 
-    RecyclerView mRecyclerView;
 
     private class AdapterDataObserver extends RecyclerView.AdapterDataObserver {
 
@@ -158,9 +168,12 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyContent.
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
         if (stickyHeaderHelper != null) {
             stickyHeaderHelper.attachToRecyclerView(mRecyclerView);
+            if(mRecyclerView instanceof  EasyRecyclerView){
+                EasyRecyclerView easyRecyclerView= (EasyRecyclerView) mRecyclerView;
+                easyRecyclerView.addHeaderHeightChangedListener(this);
+            }
         }
     }
 
@@ -179,10 +192,6 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyContent.
         mStickyHeaderChangeListener = stickyHeaderChangeListener;
     }
 
-    public RecyclerView getRecyclerView() {
-        return mRecyclerView;
-    }
-
     public MyItemRecyclerViewAdapter setStickyHeaders(boolean headersSticky) {
         // Add or Remove the sticky headers
         if (headersSticky) {
@@ -191,6 +200,10 @@ public class MyItemRecyclerViewAdapter extends EasyRecyclerAdapter<DummyContent.
             }
             if (!stickyHeaderHelper.isAttachedToRecyclerView()) {
                 stickyHeaderHelper.attachToRecyclerView(mRecyclerView);
+                if(mRecyclerView instanceof  EasyRecyclerView){
+                    EasyRecyclerView easyRecyclerView= (EasyRecyclerView) mRecyclerView;
+                    easyRecyclerView.addHeaderHeightChangedListener(this);
+                }
             }
         } else if (stickyHeaderHelper != null) {
             stickyHeaderHelper.detachFromRecyclerView(mRecyclerView);

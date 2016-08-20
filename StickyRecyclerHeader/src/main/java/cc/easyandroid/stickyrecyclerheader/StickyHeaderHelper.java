@@ -31,7 +31,9 @@ public class StickyHeaderHelper extends OnScrollListener {
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        Log.v(TAG, "onScrolled  ="   );
         updateOrClearHeader(false);
+
     }
 
     public boolean isAttachedToRecyclerView() {
@@ -120,13 +122,14 @@ public class StickyHeaderHelper extends OnScrollListener {
 
     private void updateHeader(int headerPosition, boolean updateHeaderContent) {
         // Check if there is a new header should be sticky
+        Log.v(TAG, "updateHeader  mHeaderPosition ="+  mHeaderPosition );
         if (mHeaderPosition != headerPosition) {
             mHeaderPosition = headerPosition;
             StickyRecyclerHeadersAdapter.StickViewHolder holder = getHeaderViewHolder(headerPosition);
             Log.v(TAG, "swapHeader newHeaderPosition=" + mHeaderPosition);
             swapHeader(holder);
         } else if (updateHeaderContent && mStickyHeaderViewHolder != null) {
-//            mAdapter.onBindViewHolder(mStickyHeaderViewHolder, mHeaderPosition);
+            mAdapter.onBindViewHolder(mStickyHeaderViewHolder, mHeaderPosition);
             ensureHeaderParent();
         }
         translateHeader();

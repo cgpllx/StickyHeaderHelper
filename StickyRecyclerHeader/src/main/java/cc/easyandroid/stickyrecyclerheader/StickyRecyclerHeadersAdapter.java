@@ -27,6 +27,8 @@ public interface StickyRecyclerHeadersAdapter<VH extends RecyclerView.ViewHolder
 
     ViewGroup getStickySectionHeadersHolder();
 
+    void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position);
+
     interface OnStickyHeaderChangeListener {//sticky header 改变监听
 
         void onStickyHeaderChange(int sectionIndex);

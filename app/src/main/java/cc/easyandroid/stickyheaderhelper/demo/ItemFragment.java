@@ -39,7 +39,7 @@ public class ItemFragment extends Fragment {
         recyclerView.setHeaderHander(new DefaultHeaderHander(getContext()));
         recyclerView.setFooterHander(new DefaultFooterHander(getContext()));
         List<DummyContent.DummyItem> items = new ArrayList<>();
-        items.add(0, new DummyContent.DummyItem("dd", "content111 ", "dddff", true));
+//        items.add(0, new DummyContent.DummyItem("dd", "content111 ", "dddff", true));
         items.add(new DummyContent.DummyItem("dd", "content222 ", "dddff", true));
         items.addAll(DummyContent.ITEMS);
         items.add(new DummyContent.DummyItem("dd", "content222 ", "dddff", true));
@@ -53,9 +53,9 @@ public class ItemFragment extends Fragment {
         final MyItemRecyclerViewAdapter adapter = new  MyItemRecyclerViewAdapter(items).setStickyHeaders(true);
 
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener<DummyContent.DummyItem>() {
             @Override
-            public void onItemClick(View v, int i) {
+            public void onItemClick(EasyRecyclerAdapter<DummyContent.DummyItem> easyRecyclerAdapter, View view, int i) {
                 if (toast == null) {
                     toast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
                 }
@@ -65,6 +65,7 @@ public class ItemFragment extends Fragment {
 //                toast.setText("i=" + i + "  ---  " + "dummyItem=" + adapter.getData(i).content);
                 toast.show();
             }
+
         });
     }
 }
